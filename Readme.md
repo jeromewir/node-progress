@@ -83,10 +83,12 @@ The above example would result in the output below.
 In our download example each tick has a variable influence, so we pass the chunk
 length which adjusts the progress bar appropriately relative to the total
 length.
+`bytes` module is used to format tick numbers to human-readable file sizes.
 
 ```javascript
 var ProgressBar = require('progress');
 var https = require('https');
+var bytes = require('bytes');
 
 var req = https.request({
   host: 'download.github.com',
@@ -98,9 +100,10 @@ req.on('response', function(res){
   var len = parseInt(res.headers['content-length'], 10);
 
   console.log();
-  var bar = new ProgressBar('  downloading [:bar] :rate/bps :percent :etas', {
+  var bar = new ProgressBar('  downloading [:bar] :current/:total :rate/s :percent :etas', {
     complete: '=',
     incomplete: ' ',
+    format: bytes,
     width: 20,
     total: len
   });
@@ -120,7 +123,7 @@ req.end();
 The above example result in a progress bar like the one below.
 
 ```
-downloading [=====             ] 39/bps 29% 3.7s
+downloading [=====             ] 2.70kB/9.31kB 39B/s 29% 3.7s
 ```
 
 ### Interrupt

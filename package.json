@@ -1,5 +1,5 @@
 {
-  "name": "progress",
+  "name": "@drp/progress",
   "version": "2.0.0-0",
   "description": "Flexible ascii progress bar",
   "keywords": [
